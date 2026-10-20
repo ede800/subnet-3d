@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-void font-sans text-slate-200 antialiased;
+    overflow: hidden;
+  }
+  ::selection {
+    background: rgba(0, 229, 255, 0.35);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-cyan-400/20 bg-[#06122a]/65 shadow-neon backdrop-blur-xl;
+  }
+  .glass-strong {
+    @apply rounded-2xl border border-cyan-400/25 bg-[#040d20]/85 shadow-neon backdrop-blur-2xl;
+  }
+  .hud-label {
+    @apply font-mono text-[10px] uppercase tracking-[0.18em] text-cyan-300/70;
+  }
+  .hud-title {
+    @apply font-display font-semibold uppercase tracking-[0.12em] text-cyan-50;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[11px];
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-ghost {
+    @apply border-cyan-400/25 bg-cyan-400/5 text-cyan-100 hover:bg-cyan-400/15;
+  }
+  .btn-danger {
+    @apply border-red-500/50 bg-red-500/15 text-red-100 hover:bg-red-500/30;
+  }
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 229, 255, 0.3) transparent;
+  }
+}
+
+/* Marqueurs HTML posés sur le globe (alertes BGP, chokepoints) */
+.globe-marker {
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 229, 255, 0.04) 50%, transparent 100%);
+  height: 30vh;
+  animation: scan 9s linear infinite;
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(-30vh);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
